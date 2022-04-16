@@ -5,7 +5,11 @@ import helloController
     from "./controllers/hello-controller.js";
 import userController from "./controllers/user-controller.js";
 import tuitsController from "./controllers/tuits-controller.js";
-
+var server_port = process.env.PORT || 4000;
+var server_host = process.env.HOST || '0.0.0.0';
+server.listen(server_port, server_host, function() {
+    console.log('Listening on port %d', server_port);
+});
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
     || 'mongodb://127.0.0.1/webdev'
 mongoose.connect(CONNECTION_STRING);
@@ -27,4 +31,6 @@ helloController(app);
 userController(app);
 tuitsController(app);
 app.get('/', (req, res) => {res.send('Welcome to Full Stack Development!')});
-app.listen(process.env.PORT || 4000);
+server.listen(server_port, server_host, function() {
+    console.log('Listening on port %d', server_port);
+});
